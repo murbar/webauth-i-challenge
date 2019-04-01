@@ -10,6 +10,13 @@ const getRecords = tableName => async () => {
   return records;
 };
 
+const getRecordBy = tableName => async filter => {
+  const record = await db(tableName)
+    .where(filter)
+    .first();
+  return record;
+};
+
 const getRecordById = tableName => async id => {
   const record = await db(tableName)
     .where({ id })
@@ -47,6 +54,7 @@ module.exports = {
     // getAll: getRecords(usersTable),
     getAll: getUsers,
     getById: getRecordById(usersTable),
+    getBy: getRecordBy(usersTable),
     create: addRecord(usersTable),
     update: updateRecord(usersTable),
     del: deleteRecord(usersTable)
