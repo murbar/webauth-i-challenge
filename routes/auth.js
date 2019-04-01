@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
     } else {
       const hash = bcrypt.hashSync(user.password, 4); // 12 in production
       user.password = hash;
-      const newUser = db.users.create(user);
+      const newUser = await db.users.create(user);
       // generate token and return to caller
       res.status(201).json({
         message: 'User created!'
