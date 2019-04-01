@@ -37,9 +37,15 @@ const deleteRecord = tableName => async id => {
   return deletedCount;
 };
 
+const getUsers = async () => {
+  const users = await db(usersTable).select('id', 'username', 'first_name', 'last_name', 'email');
+  return users;
+};
+
 module.exports = {
   users: {
-    getAll: getRecords(usersTable),
+    // getAll: getRecords(usersTable),
+    getAll: getUsers,
     getById: getRecordById(usersTable),
     create: addRecord(usersTable),
     update: updateRecord(usersTable),
