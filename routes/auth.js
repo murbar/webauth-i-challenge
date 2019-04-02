@@ -8,10 +8,10 @@ const router = express.Router();
 router.post('/register', async (req, res) => {
   try {
     let user = req.body;
-    const { errors } = validate.user(user);
-    if (errors) {
+    const { error } = validate.user(user);
+    if (error) {
       res.status(400).json({
-        error: errors.details[0].message
+        error: error.details[0].message
       });
     } else {
       const hash = bcrypt.hashSync(user.password, 4); // 12 in production
