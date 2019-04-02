@@ -1,10 +1,27 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Router } from '@reach/router';
+import Navigation from './components/Navigation';
+import UsersList from './components/UsersList';
+import Login from './components/Login';
+import Logout from './components/Logout';
+
+const AppWrapper = styled.main`
+  max-width: 40rem;
+  margin: 1rem auto;
+`;
 
 const App = () => {
   return (
-    <main>
+    <AppWrapper>
       <h1>Auth API demo</h1>
-    </main>
+      <Navigation />
+      <Router>
+        <UsersList path="/users" />
+        <Login path="/login" />
+        <Logout path="/logout" />
+      </Router>
+    </AppWrapper>
   );
 };
 
