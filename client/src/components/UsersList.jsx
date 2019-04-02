@@ -7,7 +7,7 @@ import LoadingMessage from './LoadingMessage';
 
 const ListWrapper = styled.div``;
 
-const App = () => {
+const UsersList = () => {
   const { state, isLoading, error } = useResource('http://localhost:4000/api/users');
   return (
     <ListWrapper>
@@ -32,4 +32,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default UsersList;

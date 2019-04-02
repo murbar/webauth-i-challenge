@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const LoginWrapper = styled.div``;
 
-const App = () => {
+const Login = () => {
   return (
     <LoginWrapper>
       <h2>Log in</h2>
@@ -16,4 +16,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Login;
