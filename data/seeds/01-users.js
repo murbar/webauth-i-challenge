@@ -14,7 +14,6 @@ const buildUsers = (count = 10) => {
   for (let i = 0; i < count; i++) {
     users.push(createUser());
   }
-  console.log(users);
   return users;
 };
 
