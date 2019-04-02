@@ -37,21 +37,24 @@ router.post('/login', async (req, res) => {
     if (!user || !credentialsValid) {
       res.status(401).json({ error: 'Invalid Credentials.' });
     } else {
+      req.session.user = {
+        id: user.id,
+        username: user.username
+      };
       res.status(200).json({ message: `Welcome, ${user.first_name}.` });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json(error);
   }
 });
 
-router.get('/users', async (req, res) => {
+router.get('/logout', async (req, res) => {
   try {
-    const users = await db.users.getAll();
-    res.status(200).json(users);
+    req.session && (await req.session.destroy());
+    res.status(200).json({ message: `You're now logged out. Goodbye!` });
   } catch (error) {
-    // console.log(error);
-    res.status(500).json({ error: 'Cannot get users.' });
+    res.status(500).json({ error: 'Cannot complete logout.' });
   }
 });
 
