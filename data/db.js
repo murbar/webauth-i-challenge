@@ -50,6 +50,7 @@ const getUsers = async () => {
 };
 
 module.exports = {
+  db,
   users: {
     // getAll: getRecords(usersTable),
     getAll: getUsers,
