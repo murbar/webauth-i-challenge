@@ -5,6 +5,7 @@ const session = require('express-session');
 const sessionConfig = require('./data/session-config.js');
 
 const auth = require('./routes/auth');
+const users = require('./routes/users');
 
 const server = express();
 
@@ -14,6 +15,7 @@ server.use(cors());
 server.use(session(sessionConfig));
 
 server.use('/api', auth);
+server.use('/api/users', users);
 
 const port = 4000;
 
