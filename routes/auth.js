@@ -24,12 +24,26 @@ router.post('/register', async (req, res) => {
       });
     }
   } catch (error) {
+    res.status(500).json({ error: 'Cannot create user.' });
+  }
+});
+
+router.post('/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const user = username ? await db.users.getBy({ username }) : null;
+    const credentialsValid =
+      user && password ? await bcrypt.compare(password, user.password) : false;
+    if (!user || !credentialsValid) {
+      res.status(401).json({ error: 'Invalid Credentials.' });
+    } else {
+      res.status(200).json({ message: `Welcome, ${user.first_name}.` });
+    }
+  } catch (error) {
     console.log(error);
     res.status(500).json(error);
   }
 });
-
-router.post('/login', (req, res) => {});
 
 router.get('/users', async (req, res) => {
   try {
