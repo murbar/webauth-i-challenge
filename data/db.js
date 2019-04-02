@@ -5,21 +5,21 @@ const knexConfig = require('../knexfile.js');
 const db = knex(knexConfig.development);
 const usersTable = 'users';
 
-const getRecords = tableName => async () => {
+const getAllRecords = tablename => async () => {
   const records = await db(tableName);
   return records;
 };
 
-const getRecordBy = tableName => async filter => {
-  const record = await db(tableName)
-    .where(filter)
-    .first();
-  return record;
+const getAllRecordsBy = tableName => async filter => {
+  // TODO throw error if no filter
+  const records = await db(tableName).where(filter);
+  return records;
 };
 
-const getRecordById = tableName => async id => {
+const getRecordBy = tableName => async filter => {
+  // TODO throw error if no filter
   const record = await db(tableName)
-    .where({ id })
+    .where(filter)
     .first();
   return record;
 };
@@ -53,7 +53,7 @@ module.exports = {
   users: {
     // getAll: getRecords(usersTable),
     getAll: getUsers,
-    getById: getRecordById(usersTable),
+    getAllBy: getAllRecordsBy(usersTable),
     getBy: getRecordBy(usersTable),
     create: addRecord(usersTable),
     update: updateRecord(usersTable),
